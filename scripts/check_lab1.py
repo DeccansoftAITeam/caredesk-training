@@ -18,7 +18,7 @@ settings_path = root / ".claude" / "settings.json"
 need(settings_path.exists(), ".claude/settings.json exists")
 if settings_path.exists():
     try:
-        s = json.loads(settings_path.read_text())
+        s = json.loads(settings_path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as e:
         s = {}
         need(False, f"settings.json is valid JSON ({e})")
@@ -41,7 +41,7 @@ if settings_path.exists():
 claude_md = root / "CLAUDE.md"
 need(claude_md.exists(), "CLAUDE.md exists")
 if claude_md.exists():
-    text = claude_md.read_text()
+    text = claude_md.read_text(encoding="utf-8-sig")
     need(len(text.splitlines()) < 80, "CLAUDE.md is under 80 lines")
     need("@AGENTS.md" in text, "CLAUDE.md imports @AGENTS.md")
     need("@docs/org-rules.md" in text, "CLAUDE.md imports @docs/org-rules.md")
@@ -49,7 +49,7 @@ if claude_md.exists():
 rule = root / ".claude" / "rules" / "python-tests.md"
 need(rule.exists(), ".claude/rules/python-tests.md exists")
 if rule.exists():
-    need(bool(re.search(r"^paths:", rule.read_text(), re.M)), "rule file has `paths:` frontmatter")
+    need(bool(re.search(r"^paths:", rule.read_text(encoding="utf-8-sig"), re.M)), "rule file has `paths:` frontmatter")
 
 print()
 print("ALL CHECKS PASSED" if not problems else f"{len(problems)} CHECK(S) FAILED")
