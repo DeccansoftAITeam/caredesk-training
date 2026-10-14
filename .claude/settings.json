@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Bash(uv run pytest *)",
+      "Bash(uv run ruff *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(uv add *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./seed/patients*.csv)",
+      "Edit(./backend/migrations/**)",
+      "Edit(./.github/workflows/**)",
+      "Bash(git push origin main*)",
+      "Bash(curl *)"
+    ]
+  }
+}
