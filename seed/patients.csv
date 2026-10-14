@@ -1,0 +1,21 @@
+patient_id,full_name,dob,phone,email,national_id,diagnosis_note
+1,Asha Nair,1964-07-21,+91-9151847156,asha1@example.test,SYN-19722233,Routine check-up
+2,Ravi Mehta,1978-10-02,+91-9644854973,ravi2@example.test,SYN-38816302,Hypertension
+3,Meera Mehta,1982-07-03,+91-9358409929,meera3@example.test,SYN-22175294,Routine check-up
+4,Karan Gupta,1958-10-04,+91-9339701014,karan4@example.test,SYN-94641177,Routine check-up
+5,Sana Rao,1991-10-13,+91-9153246119,sana5@example.test,SYN-39673100,Hypertension
+6,Vikram Das,1963-05-14,+91-9254892713,vikram6@example.test,SYN-82569631,Hypertension
+7,Isha Joshi,1974-09-27,+91-9832294821,isha7@example.test,SYN-34256684,Hypertension
+8,Arjun Joshi,1991-11-07,+91-9499858816,arjun8@example.test,SYN-23076910,Routine check-up
+9,Neha Mehta,1991-01-20,+91-9321146487,neha9@example.test,SYN-76627625,Routine check-up
+10,Rohan Gupta,1975-08-19,+91-9586603020,rohan10@example.test,SYN-58530762,Asthma
+11,Priya Iyer,1966-12-25,+91-9362096638,priya11@example.test,SYN-20986393,Routine check-up
+12,Dev Shah,1988-08-11,+91-9883235912,dev12@example.test,SYN-70241505,Asthma
+13,Tara Joshi,1959-02-17,+91-9548955962,tara13@example.test,SYN-32140838,Asthma
+14,Kabir Kulkarni,1986-07-02,+91-9817491316,kabir14@example.test,SYN-20418044,Routine check-up
+15,Anaya Joshi,1975-06-23,+91-9476001182,anaya15@example.test,SYN-89774974,Migraine
+16,Rahul Joshi,1984-02-27,+91-9200497933,rahul16@example.test,SYN-46230636,Migraine
+17,Divya Mehta,1958-12-23,+91-9432438386,divya17@example.test,SYN-96856164,Routine check-up
+18,Nikhil Reddy,1973-12-13,+91-9817960391,nikhil18@example.test,SYN-56574257,Hypertension
+19,Pooja Reddy,1977-03-20,+91-9225730654,pooja19@example.test,SYN-76262352,Hypertension
+20,Sameer Iyer,1973-03-24,+91-9365874400,sameer20@example.test,SYN-63404922,Migraine

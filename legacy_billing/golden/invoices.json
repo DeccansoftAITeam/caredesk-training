@@ -1,0 +1,56 @@
+{
+  "V001": {
+    "avg_line": 5000,
+    "discount": 0,
+    "invoice_no": "INV-00001",
+    "patient_owes": 5350,
+    "subtotal": 5000,
+    "tax": 350,
+    "total": 5350
+  },
+  "V002": {
+    "avg_line": 14500,
+    "discount": 2900,
+    "invoice_no": "INV-00002",
+    "patient_owes": 5585,
+    "subtotal": 29000,
+    "tax": 1827,
+    "total": 27927
+  },
+  "V003": {
+    "avg_line": 4848,
+    "discount": 484,
+    "invoice_no": "INV-00003",
+    "patient_owes": 9299,
+    "subtotal": 9697,
+    "tax": 86,
+    "total": 9299
+  },
+  "V004": {
+    "avg_line": 4141,
+    "discount": 1863,
+    "invoice_no": "INV-00004",
+    "patient_owes": 2175,
+    "subtotal": 12425,
+    "tax": 316,
+    "total": 10878
+  },
+  "V005": {
+    "avg_line": 2275,
+    "discount": 68,
+    "invoice_no": "INV-00005",
+    "patient_owes": 472,
+    "subtotal": 2275,
+    "tax": 154,
+    "total": 2361
+  },
+  "V006": {
+    "avg_line": 6116,
+    "discount": 2201,
+    "invoice_no": "INV-00006",
+    "patient_owes": 16887,
+    "subtotal": 18349,
+    "tax": 739,
+    "total": 16887
+  }
+}

@@ -1,0 +1,8 @@
+[
+  {"visit_id": "V001", "items": [{"code": "CONSULT", "qty": 1}], "discount_pct": 0, "insured": false},
+  {"visit_id": "V002", "items": [{"code": "CONSULT", "qty": 1}, {"code": "XRAY", "qty": 2}], "discount_pct": 10, "insured": true},
+  {"visit_id": "V003", "items": [{"code": "VACCINE", "qty": 3}, {"code": "BANDAGE", "qty": 4}], "discount_pct": 5, "insured": false},
+  {"visit_id": "V004", "items": [{"code": "LABPANEL", "qty": 2}, {"code": "CONSULT", "qty": 1}, {"code": "BANDAGE", "qty": 1}], "discount_pct": 15, "insured": true},
+  {"visit_id": "V005", "items": [{"code": "BANDAGE", "qty": 7}], "discount_pct": 3, "insured": true},
+  {"visit_id": "V006", "items": [{"code": "XRAY", "qty": 1}, {"code": "VACCINE", "qty": 1}, {"code": "LABPANEL", "qty": 1}], "discount_pct": 12, "insured": false}
+]

@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+node_modules/
+.next/
+caredesk.db
+.env
+.claude/settings.local.json
+.claude/worktrees/
