@@ -10,3 +10,5 @@ caredesk.db
 .env
 .claude/settings.local.json
 .claude/worktrees/
+provisioned_credentials.csv
+aliases*.txt

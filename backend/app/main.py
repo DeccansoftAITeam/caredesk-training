@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 
-from app.db import Base, engine
 from app.errors import AppError, app_error_handler
 from app.routes import appointments
 
-Base.metadata.create_all(engine)
+# Tables are created by Alembic migrations (`uv run alembic upgrade head`), not at import time.
 
 app = FastAPI(title="CareDesk")
 app.add_exception_handler(AppError, app_error_handler)
