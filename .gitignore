@@ -12,3 +12,4 @@ caredesk.db
 .claude/worktrees/
 provisioned_credentials.csv
 aliases*.txt
+.claude/worktrees/
