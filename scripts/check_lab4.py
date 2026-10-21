@@ -44,7 +44,7 @@ if hook.exists():
     def run(cmd: str) -> int:
         payload = json.dumps({"tool_name": "Bash", "tool_input": {"command": cmd}})
         return subprocess.run(
-            [sys.executable, str(hook)], input=payload, text=True, capture_output=True
+            [sys.executable, str(hook)], input=payload, text=True, capture_output=True, encoding="utf-8", errors="replace"
         ).returncode
 
     for cmd in ["cat .env", "type secrets\\sms_provider.key", "head seed/patients.csv",

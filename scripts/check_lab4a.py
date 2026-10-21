@@ -40,7 +40,7 @@ need("PGHOST" in env_example, ".env.example documents the PG* variables")
 active = [ln for ln in env_example.splitlines() if ln.strip().startswith("DATABASE_URL=")]
 need(not active, ".env.example does not set DATABASE_URL (it would override PG*)")
 
-r = subprocess.run(["uv", "run", "pytest", "-q"], cwd=backend, capture_output=True, text=True)
+r = subprocess.run(["uv", "run", "pytest", "-q"], cwd=backend, capture_output=True, text=True, encoding="utf-8", errors="replace")
 need(r.returncode == 0, "backend tests still pass (tests use in-memory SQLite)")
 
 try:
@@ -54,7 +54,7 @@ if values.get("PGHOST"):
         "from sqlalchemy import inspect; from app.db import engine; "
         "print('appointments' in inspect(engine).get_table_names())"
     )
-    r = subprocess.run(["uv", "run", "python", "-c", code], cwd=backend, capture_output=True, text=True)
+    r = subprocess.run(["uv", "run", "python", "-c", code], cwd=backend, capture_output=True, text=True, encoding="utf-8", errors="replace")
     need(r.stdout.strip().endswith("True"), "connected to PostgreSQL and the appointments table exists")
 else:
     print("SKIP  PGHOST not set: skipping the live database check")

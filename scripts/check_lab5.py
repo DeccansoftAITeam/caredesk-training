@@ -53,7 +53,7 @@ if server.exists():
 
 if smoke.exists():
     r = subprocess.run(
-        ["uv", "run", "--python", "3.12", "--script", str(smoke)], capture_output=True, text=True, cwd=root
+        ["uv", "run", "--python", "3.12", "--script", str(smoke)], capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=root
     )
     out = r.stdout
     need(r.returncode == 0, "smoke test exits 0")
