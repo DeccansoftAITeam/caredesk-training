@@ -14,11 +14,26 @@
     ],
     "deny": [
       "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
       "Read(./seed/patients*.csv)",
       "Edit(./backend/migrations/**)",
       "Edit(./.github/workflows/**)",
       "Bash(git push origin main*)",
       "Bash(curl *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/block_secret_reads.py\""
+          }
+        ]
+      }
     ]
   }
 }
