@@ -1,0 +1,76 @@
+name: Weekly docs-drift report
+
+# Report-only. The job that runs Claude has read-only permissions and read-only tools; a second job with no
+# Claude in it turns the result into an issue. This job never opens a pull request.
+on:
+  schedule:
+    - cron: "17 3 * * 1"   # Mondays 03:17 UTC (scheduled runs only fire from the default branch)
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: docs-drift
+  cancel-in-progress: false
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write   # the action exchanges an OIDC token for its GitHub App token
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 50
+          persist-credentials: false
+
+      - name: Claude read-only analysis
+        id: claude
+        uses: anthropics/claude-code-action@a5a423f75c251dcbff8a74e99f83b2cb03c72bfa # v1.0.256
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Compare docs/ and specs/ against backend/app. List places where the documentation no longer
+            matches the code (endpoints, environment variables, behaviour). Read-only: never edit files.
+          claude_args: |
+            --model sonnet
+            --max-turns 10
+            --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git diff:*)"
+            --disallowedTools "Edit,Write,MultiEdit,NotebookEdit,Bash(git push:*),Bash(gh pr create:*)"
+            --json-schema '{"type":"object","properties":{"drift":{"type":"array","items":{"type":"object","properties":{"doc":{"type":"string"},"code":{"type":"string"},"issue":{"type":"string"}},"required":["doc","issue"]}}},"required":["drift"]}'
+
+      - name: Write the report
+        env:
+          REPORT_JSON: ${{ steps.claude.outputs.structured_output }}
+        run: |
+          if [ -n "$REPORT_JSON" ]; then printf '%s' "$REPORT_JSON" > report.json; else echo '{"drift":[]}' > report.json; fi
+          python3 - <<'PY'
+          import json
+          items = json.load(open("report.json")).get("drift", [])
+          lines = ["# Docs drift report", ""] + [f"- **{i['doc']}**: {i['issue']}" for i in items]
+          open("report.md", "w").write("\n".join(lines) + "\n")
+          PY
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: docs-drift-report
+          path: report.*
+          retention-days: 30
+
+  publish:
+    needs: analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write   # the only write permission in this workflow; no Claude runs in this job
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: docs-drift-report
+      - name: Open an issue (never a pull request)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh issue create --title "Docs drift report $(date -u +%F)" --body-file report.md
