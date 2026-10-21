@@ -164,3 +164,17 @@ def test_SPEC001_AC4_backoff_doubles_with_every_retry(db, monkeypatch):
     run(db, provider, sleeps)
 
     assert sleeps == [1.0, 2.0, 4.0]
+
+
+def test_SPEC001_AC1_includes_an_appointment_starting_exactly_24_hours_ahead(db):
+    make_appointment(db, starts_at=NOW + timedelta(hours=24))
+    make_contact(db)
+    assert run(db, FakeSmsProvider()) == RunSummary(sent=1)
+
+
+def test_SPEC001_AC1_excludes_an_appointment_starting_exactly_now(db):
+    make_appointment(db, starts_at=NOW)
+    make_contact(db)
+    provider = FakeSmsProvider()
+    assert run(db, provider) == RunSummary()
+    assert provider.calls == 0
